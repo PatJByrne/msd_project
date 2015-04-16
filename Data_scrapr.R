@@ -1,77 +1,103 @@
 library(XML)
 library(data.table)
+wrap_rows <- function(sub_tb,sets){
+  
+  if (nrow(sub_tb) == 3) {
+    return(sub_tb)
+  }
+
+  seps = (tail(sets,n=-1)-head(sets,n=-1))/3
+  cols = ncol(tb)*max(seps)
+
+  groups = (which(sub_tb$V3[seq(1,nrow(sub_tb),by=3)+1] != '') - 1) * 3 +1#fuck all 1-indexed languages
+  groups = append(groups,nrow(sub_tb))
+
+  wrapped_tb = data.table()
+  
+  for(i in seq(length(groups) -1)){
+    wrapping_tb = data.table()
+    print(c(i,seps,seps[i],max(seps)))    
+    if(seps[i]!=max(seps)){
+      wrapping_tb = rbind(wrapping_tb, sub_tb[groups[i]:(groups[i]+2)])
+      empty_cols = rep('',ncol(sub_tb)*(max(seps)-seps[i]))
+      empty_cols = rbind(empty_cols,empty_cols,empty_cols)
+      wrapping_tb = cbind(wrapping_tb, empty_cols)
+    } else{
+      for(j in seq(seps[i])){
+        #wrapping_tb = rbind(wrapping_tb, sub_tb[(groups[i]+3*(j-1)):((groups[i]+2)+3*(j-1))])
+        index = seq(groups[i]+(j-1)*3,groups[i]+2+(j-1)*3)
+        if(j==1){
+          wrapping_tb = rbind(wrapping_tb,sub_tb[index]) 
+        }
+        if(j >1){
+          wrapping_tb = cbind(wrapping_tb,sub_tb[index])
+        }
+      }
+    }
+    
+    wrapped_tb = rbind(wrapped_tb,wrapping_tb,fill = T)
+  }
+  wrapped_tb[wrapped_tb == '']<-NA
+  wrapped_tb = wrapped_tb[,colSums(is.na(wrapped_tb)) != nrow(wrapped_tb),with = F]
+  return(wrapped_tb)
+}
+
+
+
+parse_splits = function(tb){
+  sets = append(as.vector(which(tb[,1,with = F] != '' & tb[,1,with = F] != 'WPOC')),nrow(tb)+2)
+  if(sum(tail(sets,n=-1)-head(sets,n=-1) != 3)){# if any of the teams' scores wrap to a new set of rows
+    tb <- wrap_rows(tb,sets)
+  }
+  names = as.vector(which(tb[,1,with = F] != '' & tb[,1,with = F] != 'WPOC'))
+  #tb <- tb[,colSums(tb == NA)<nrow(tb),with = F]
+  checkpoints = names - 1
+  splits = names
+  total_time = names+1
+  new_tbl = data.table()
+  for(i in seq(length(names))){
+    num_points = ncol(tb[names[i]]) - rowSums(is.na(tb[names[i]])) - 1 #the extra one is the name column
+    test = data.table(Name = rep(tb[names[i],1,with=F],num_points))
+    
+    test = mutate(test,Checkpoint = t(tb[checkpoints[i],seq(2,num_points+1),with = F]))
+    test = mutate(test,Split = t(tb[splits[i],seq(2,num_points+1),with = F]))
+    test = mutate(test,Total_time = t(tb[total_time[i],seq(2,num_points+1),with = F]))
+    new_tbl = rbind(new_tbl,test)
+  }
+  return(new_tbl)
+}
+
+
 the_url <- 'http://www.wpoc.org/results/150322courses.htm'
-tables <- readHTMLTable(the_url)
+tables <- tail(readHTMLTable(the_url),n=-2)
 #this is ugly, but so is the website.  There's two garbage tables in the page
 #If anyone has a cleaner workaround, lemme know
-for(i in seq(length(tables)-2)+2){
-  write.table(data.table(tables[[i]]),paste('Race_data_team_places_points',toString(i-2),sep = '_'),row.names = FALSE,col.names = FALSE)
+for(i in seq( length(tables) ) ){
+  write.table(data.table(tables[[i]]),paste('Race_data_team_places_points',toString(i),sep = '_'),row.names = FALSE,col.names = FALSE)
 }
+
+
+
 
 the_url <- 'http://www.wpoc.org/results/2015visits.htm'
 tables <- readHTMLTable(the_url)
 write.table(data.table(tables[[1]]),'Race_data_checkpoint_visits',row.names = FALSE,col.names = FALSE)
 
+
+
 the_url <- 'http://www.wpoc.org/results/150322splits.htm'
-tables <- readHTMLTable(the_url)
-for(i in seq(length(tables)-1)+1){
+tables <- tail(readHTMLTable(the_url),n=-1) #strictly decorative table starts the webpage
+tb_formatted = data.table()
+
+for(i in seq( length(tables) ) ){
   tb = data.table(tables[[i]],keep.rownames = F)
-
-  data_rows = complete.cases(tb)
-  tb = tb[data_rows,c(3,seq(6,ncol(tb))),with = F]#two sets of two columns of BS
-  new_tb = parse_splits(tb)
+  tb[tb ==''] <- NA
+  tb = tb[rowSums(is.na(tb)) != ncol(tb)]
+  tb = tb[,colSums(is.na(tb)) != nrow(tb),with = F]
   
-  tb <- tb[,colSums(tb == '')<nrow(tb),with = F]
-  checkpoints = names - 1
-  splits = names + 1
-  total_time = names+2
-  
-  num_points = ncol(tb[names[1]]) - rowSums(tb[names[1]]=='') - 1 #the extra one is the name column
-  test = data.table(Name = rep(tb[names[1],1,with=F],num_points))
-  
-  test = mutate(test,Checkpoint = t(tb[checkpoints[1],seq(2,num_points+1),with = F]))
-  test = mutate(test,Split = t(tb[splits[1],seq(2,num_points+1),with = F]))
-  test = mutate(test,Total_time = t(tb[total_time[1],seq(2,num_points+1),with = F]))
-  write.table(tb[data_rows,],paste('Race_data_team_splits_checkpoints',toString(i-1),sep = '_'),row.names = FALSE,col.names = FALSE)
+  tb = tb[,c(3, seq(6,ncol(tb)) ),with = F]#skipping the redundant final time and team league
+  #data_rows = complete.cases(tb)
+  #tb = tb[data_rows, c(3, seq(6,ncol(tb)) ),with = F]#two sets of two columns of BS
+  tb_formatted = rbind(tb_formatted,parse_splits(tb))
 }
-
-parse_splits = function(tb){
-  names = as.vector(which(tb[,1,with = F] != '' & tb[,1,with = F] != 'WPOC'))
-  if(sum(names[2:length(names)]-names[1:length(names)-1] != 3)){
-    
-  }
-  tb <- tb[,colSums(tb == '')<nrow(tb),with = F]
-  checkpoints = names - 1
-  splits = names
-  total_time = names+1
-  new_tbl = matrix(ncol = 4, nrow = (ncol(tb)-1)*nrow(tb)/3)
-  for(i in seq(length(names))){
-    num_points = ncol(tb[names[i]]) - rowSums(tb[names[i]]=='') - 1 #the extra one is the name column
-    test = data.table(Name = rep(tb[names[i],1,with=F],num_points))
-  
-    test = mutate(test,Checkpoint = t(tb[checkpoints[i],seq(2,num_points+1),with = F]))
-    test = mutate(test,Split = t(tb[splits[i],seq(2,num_points+1),with = F]))
-    test = mutate(test,Total_time = t(tb[total_time[i],seq(2,num_points+1),with = F]))
-    rbind(new_tbl,test)
-  }
-  
-}
-
-wrap_rows <- function(sub_tb){
-  if (nrow(sub_tb) == 3) {
-    return(sub_tb)
-  }
-
-  sets = nrow(sub_tb)/3-1
-  i = 1
-  new_tbl = sub_tb[1:3]
-  print(new_tbl)
-  while(sets){
-    w_r = sub_tb[seq(3+i,5+i),]
-    new_tbl = cbind(new_tbl, w_r)
-    print(new_tbl)
-    i = i+3
-    sets = sets-1
-  }
-  return(new_tbl)
-}
+write.table(tb_formatted,'Race_data_team_splits_checkpoints')
