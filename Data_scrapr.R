@@ -1,5 +1,6 @@
 library(XML)
 library(data.table)
+library(dplyr)
 wrap_rows <- function(sub_tb,sets){
   
   if (nrow(sub_tb) == 3) {
@@ -34,6 +35,7 @@ wrap_rows <- function(sub_tb,sets){
         }
       }
     }
+    
     
     wrapped_tb = rbind(wrapped_tb,wrapping_tb,fill = T)
   }
@@ -84,7 +86,7 @@ for(i in c(1,5,6,7,8)){
   tbl[,i]<-as.numeric(tbl[,i])
 }
 title = 'Team_place_time_score.csv'
-write.table(tbl,title,row.names = FALSE,col.names = FALSE)
+write.table(tbl,title,row.names = FALSE,col.names = FALSE,sep = ',')
 
 the_url <- 'http://www.wpoc.org/results/2015visits.htm'
 tables <- readHTMLTable(the_url,stringsAsFactors = F)
