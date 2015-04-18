@@ -58,7 +58,6 @@ parse_splits = function(tb){
   for(i in seq(length(names))){
     num_points = ncol(tb[names[i]]) - rowSums(is.na(tb[names[i]])) - 1 #the extra one is the name column
     test = data.table(Name = rep(tb[names[i],1,with=F],num_points))
-    
     test = mutate(test,Checkpoint = t(tb[checkpoints[i],seq(2,num_points+1),with = F]))
     test = mutate(test,Split = t(tb[splits[i],seq(2,num_points+1),with = F]))
     test = mutate(test,Total_time = t(tb[total_time[i],seq(2,num_points+1),with = F]))
@@ -69,28 +68,63 @@ parse_splits = function(tb){
 
 
 the_url <- 'http://www.wpoc.org/results/150322courses.htm'
-tables <- tail(readHTMLTable(the_url),n=-2)
-#this is ugly, but so is the website.  There's two garbage tables in the page
-#If anyone has a cleaner workaround, lemme know
-for(i in seq( length(tables) ) ){
-  write.table(data.table(tables[[i]]),paste('Race_data_team_places_points',toString(i),sep = '_'),row.names = FALSE,col.names = FALSE)
+tables <- tail(readHTMLTable(the_url,stringsAsFactors = F),n=-2)
+tbl_6 <- tables[[2]]
+cnames = tbl_6[1,]
+tbl_6[1,1] <- 'Place'
+tbl_6 <-mutate(tbl_6,time_limit= 6)
+tbl_3 <- tables[[1]]
+tbl_3 <-mutate(tbl_3,time_limit= 3)
+tbl_3[1,1] <- 'Place'
+tbl <- rbind(tbl_6,tail(tbl_3,n=-1))
+colnames(tbl) = append(cnames,'time_limit')
+
+tbl <- tail(tbl,n=-1)
+for(i in c(1,5,6,7,8)){
+  tbl[,i]<-as.numeric(tbl[,i])
 }
-
-
-
+title = 'Team_place_time_score.csv'
+write.table(tbl,title,row.names = FALSE,col.names = FALSE)
 
 the_url <- 'http://www.wpoc.org/results/2015visits.htm'
-tables <- readHTMLTable(the_url)
-write.table(data.table(tables[[1]]),'Race_data_checkpoint_visits',row.names = FALSE,col.names = FALSE)
+tables <- readHTMLTable(the_url,stringsAsFactors = F)
+tbl <- tables[[1]]
+title = paste(gsub(' ', '_', tbl[1,1]),'.csv',sep = '_')
+colnames(tbl) <- tbl[2,]
+tbl <- head(tail(tbl,n=-2),n=-1)
+for(i in seq(ncol(tbl))){
+  tbl[,i]<-as.numeric(tbl[,i])
+}
+write.table(tbl,title,sep = ',',row.names = F)
 
-
+the_url <- 'http://www.wpoc.org/registrationlist2015.htm'
+tables <- readHTMLTable(the_url,stringsAsFactors = F)
+tbl_6 <- tables[[1]]
+tbl_6 <-mutate(tbl_6,time_limit= 6)
+tbl_3 <- tables[[2]]
+tbl_3 <-mutate(tbl_3,time_limit= 3)
+tbl <- rbind(tbl_6,tail(tbl_3,n=-1))
+colnames(tbl) = tbl[1,]
+colnames(tbl)[5]<- 'time_limit'
+for(i in seq(ncol(tbl))){
+  tbl[,i] <- gsub('Â','',tbl[,i])
+}
+tbl[grep('[^Y]',tbl[,4]),4] <- 'N'
+tbl[2,3] <- '2'
+tbl[60,3] <- '2'
+title = 'registration_list.csv'
+tbl <- tail(tbl,n=-1)
+for(i in c(3,5)){
+  tbl[,i]<-as.numeric(tbl[,i])
+}
+write.table(tbl,title,sep = ',',row.names = F)
 
 the_url <- 'http://www.wpoc.org/results/150322splits.htm'
-tables <- tail(readHTMLTable(the_url),n=-1) #strictly decorative table starts the webpage
+tables <- tail(readHTMLTable(the_url,stringsAsFactors = F),n=-1) #strictly decorative table starts the webpage
 tb_formatted = data.table()
 
 for(i in seq( length(tables) ) ){
-  tb = data.table(tables[[i]],keep.rownames = F)
+  tb = data.table(tables[[i]],keep.rownames = F,as.is = T)
   tb[tb ==''] <- NA
   tb = tb[rowSums(is.na(tb)) != ncol(tb)]
   tb = tb[,colSums(is.na(tb)) != nrow(tb),with = F]

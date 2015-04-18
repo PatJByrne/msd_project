@@ -1,0 +1,73 @@
+1 "452 Hail to the Chimp" "EM6" "" NA 1170 1200 30 6
+2 "411 Olga   Huber" "MW6" "" NA 910 910 0 6
+3 "429 Thomas Rycroft" "MM6" "" NA 890 890 0 6
+4 "412 Wishin' I was Fishin'" "MM6" "" NA 880 880 0 6
+5 "420 Grey   Michels" "MM6" "" NA 860 860 0 6
+6 "440 Jim Trautmann" "MM6" "WPOC" NA 840 840 0 6
+7 "416 Wonderful Adventure Racers" "EB6" "" NA 820 830 10 6
+7 "444 Rev3 Ladies" "EW6" "" NA 820 820 0 6
+9 "438 Riley Jane" "EM6" "" NA 810 810 0 6
+NA "404 Team Spang" "MB6" "WPOC" NA 790 790 0 6
+10 "401 BeeRingers" "MB6" "" NA 780 780 0 6
+11 "431 IndyXpress" "MB6" "" NA 760 760 0 6
+11 "426 Dan Beggs" "MM6" "" NA 760 760 0 6
+13 "458 Todd Pownell" "MM6" "" NA 750 750 0 6
+14 "406 Finders Keepers" "EM6" "" NA 740 740 0 6
+15 "445 Michelle Green" "EW6" "" NA 730 730 0 6
+16 "435 MK" "EM6" "" NA 720 740 20 6
+17 "459 American Adventure Sports Cycle Shop" "EB6" "" NA 710 710 0 6
+17 "430 JJ" "MM6" "" NA 710 710 0 6
+17 "432 Jerry Agin" "VM6" "WPOC" NA 710 710 0 6
+17 "451 Come Back Shane!" "MM6" "" NA 710 730 20 6
+21 "422 Kevin Peterson" "EM6" "" NA 680 680 0 6
+22 "409 Nightcrawlers" "VB6" "" NA 670 670 0 6
+22 "410 Victorious Seekers" "EB6" "" NA 670 670 0 6
+24 "437 Ryan Knecht" "MM6" "WPOC" NA 610 610 0 6
+25 "427 Erin Rycroft" "EW6" "" NA 600 600 0 6
+26 "455 WeMo" "EB6" "" NA 580 580 0 6
+26 "436 Over the Hills" "MM6" "" NA 580 580 0 6
+28 "423 Lisa Storey" "EW6" "" NA 560 560 0 6
+28 "419 Third Wheel" "EB6" "" NA 560 560 0 6
+28 "456 Brian Ottinger" "VM6" "" NA 560 620 60 6
+31 "450 Strat-o-matic" "EM6" "WPOC" NA 550 550 0 6
+31 "453 Controlled Chaos" "MB6" "" NA 550 550 0 6
+33 "418 Buck n' Sunshine" "EB6" "" NA 540 540 0 6
+34 "454 McFoxy's Revenge" "EB6" "" NA 530 530 0 6
+35 "415 Clint Hartle" "EM6" "" NA 520 520 0 6
+35 "439 Rhumb Runners" "VB6" "WPOC" NA 520 520 0 6
+37 "405 Yaki   Barak" "MM6" "WPOC" NA 500 500 0 6
+38 "408 Mountain Meisters" "EM6" "" NA 460 460 0 6
+39 "421 Charles Borchart" "VM6" "" NA 440 440 0 6
+39 "448 MZ" "EB6" "" NA 440 440 0 6
+39 "407 Gordon   Huang" "EM6" "WPOC" NA 440 440 0 6
+NA "403 High and Dry" "MM6" "" NA 400 400 0 6
+42 "428 Rust Belt Runners" "MM6" "" NA 390 390 0 6
+43 "447 Not Our First Threesome" "EB6" "" NA 380 380 0 6
+44 "457 Brian Buchan" "MM6" "" NA 370 370 0 6
+45 "413 WTF (Where's the Finish)" "MW6" "" NA 340 340 0 6
+46 "443 Will Orienteer for Beer" "EB6" "" NA 330 330 0 6
+46 "442 Team Shangle" "MB6" "" NA 330 330 0 6
+48 "434 Honey Badgers" "EB6" "" NA 320 320 0 6
+49 "414 Kathy Jo Rufener" "MW6" "" NA 300 300 0 6
+50 "433 Master Mart" "EM6" "" NA 260 260 0 6
+52 "417 Richard Davies" "VM6" "" NA -20 360 380 6
+53 "403 High and Dry" "MM6" "" NA -180 330 510 6
+1 "291 Klokkerud from Norway" "MM3" "" NA 390 390 0 3
+2 "279 Jonestown" "MB3" "" NA 360 390 30 3
+3 "285 NimKik Skulls" "EM3" "" NA 270 270 0 3
+4 "277 Sherry   Shank" "VW3" "WPOC" NA 230 230 0 3
+5 "281 Team Wildman" "EB3" "" NA 220 250 30 3
+6 "284 Maptitude" "VB3" "" NA 200 200 0 3
+7 "286 Team 3DZ" "EM3" "" NA 180 180 0 3
+8 "275 This is what happens Larry" "EM3" "" NA 150 150 0 3
+9 "278 The Doddering Gits" "MB3" "" NA 140 140 0 3
+10 "276 Team Immelmann" "EB3" "" NA 120 120 0 3
+10 "290 Left Shark" "EB3" "" NA 120 120 0 3
+12 "289 Two of a Kind" "MB3" "" NA 90 90 0 3
+13 "295 Where's Waldo?" "EB3" "" NA 80 90 10 3
+14 "292 John Hinderliter" "VM3" "" NA 70 250 180 3
+15 "293 Team Atomic Ants" "EB3" "" NA 60 60 0 3
+16 "280 Barbara Johnstone" "VW3" "WPOC" NA 20 20 0 3
+17 "287 MudSkippers" "EW3" "" NA 0 40 40 3
+18 "446 Farmers Insurance Racing" "EM3" "" NA -50 220 270 3
+19 "288 Fox River" "EB3" "" NA -220 110 330 3
