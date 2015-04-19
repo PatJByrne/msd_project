@@ -3,9 +3,9 @@
 
 # <codecell>
 
+import numpy as np
 Earth_Radius = 6.37e6
 degrees = np.pi/180.
-import numpy as np
 
 def distance(pt1,pt2):
     '''Trick is to assume that the point of intest is the 'North Pole'.  We're modeling 
@@ -19,9 +19,13 @@ def distance(pt1,pt2):
     
     Lat -= Lat[0]
     #Long -= Long[0]
-    #elev -= elev[0]
+    elev -= elev[0]
+
+    delta_el = elev[1]
+    delta_lat = Lat[1]
+    d_el_d_lat = delta_el/delta_lat
     
-    dist = Earth_Radius*abs(Lat[1])
+    dist = Earth_Radius*abs(delta_lat) + 0.5*d_el_d_lat*delta_lat**2
     return(dist)
     
 def point_distance(pt1,pt2,filepath = '.'):
@@ -38,16 +42,9 @@ def point_distance(pt1,pt2,filepath = '.'):
     p2_data = np.asarray(lines[pt2_index].strip().split(',')[1:4],dtype = float)
 
     dist = distance(p1_data,p2_data)
-    print (dist)
-    
-point_distance(113,135,'/home/patbyrne/Documents/modeling_social_data')
 
-# <codecell>
-
-?distance
-
-# <codecell>
-
+    return(dist)
+        
 
 # <codecell>
 
