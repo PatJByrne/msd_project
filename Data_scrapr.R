@@ -47,7 +47,7 @@ wrap_rows <- function(sub_tb,sets){
 
 
 parse_splits = function(tb){
-  sets = append(as.vector(which(tb[,1,with = F] != '' & tb[,1,with = F] != 'WPOC')),nrow(tb)+2)
+  sets = append(as.vector(which(tb[,1,with = F] != 'WPOC')),nrow(tb)+2)
   if(sum(tail(sets,n=-1)-head(sets,n=-1) != 3)){# if any of the teams' scores wrap to a new set of rows
     tb <- wrap_rows(tb,sets)
   }
@@ -59,7 +59,7 @@ parse_splits = function(tb){
   new_tbl = data.table()
   for(i in seq(length(names))){
     num_points = ncol(tb[names[i]]) - rowSums(is.na(tb[names[i]])) - 1 #the extra one is the name column
-    test = data.table(Name = rep(tb[names[i],1,with=F],num_points))
+    test = data.table(Name = c(do.call("cbind",rep(tb[names[i],1,with=F],num_points))))
     test = mutate(test,Checkpoint = t(tb[checkpoints[i],seq(2,num_points+1),with = F]))
     test = mutate(test,Split = t(tb[splits[i],seq(2,num_points+1),with = F]))
     test = mutate(test,Total_time = t(tb[total_time[i],seq(2,num_points+1),with = F]))
@@ -126,12 +126,12 @@ tables <- tail(readHTMLTable(the_url,stringsAsFactors = F),n=-1) #strictly decor
 tb_formatted = data.table()
 
 for(i in seq( length(tables) ) ){
-  tb = data.table(tables[[i]],keep.rownames = F,as.is = T)
+  tb = data.table(tables[[i]],keep.rownames = F)[,c(-1,-2,-4,-5),with = F]
   tb[tb ==''] <- NA
   tb = tb[rowSums(is.na(tb)) != ncol(tb)]
   tb = tb[,colSums(is.na(tb)) != nrow(tb),with = F]
   
-  tb = tb[,c(3, seq(6,ncol(tb)) ),with = F]#skipping the redundant final time and team league
+  #tb = tb[,c(3, seq(6,ncol(tb)) ),with = F]#skipping the redundant final time and team league
   #data_rows = complete.cases(tb)
   #tb = tb[data_rows, c(3, seq(6,ncol(tb)) ),with = F]#two sets of two columns of BS
   tb_formatted = rbind(tb_formatted,parse_splits(tb))
