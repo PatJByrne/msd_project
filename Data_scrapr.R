@@ -136,4 +136,4 @@ for(i in seq( length(tables) ) ){
   #tb = tb[data_rows, c(3, seq(6,ncol(tb)) ),with = F]#two sets of two columns of BS
   tb_formatted = rbind(tb_formatted,parse_splits(tb))
 }
-write.table(tb_formatted,'Race_data_team_splits_checkpoints')
+write.table(tb_formatted,'Race_data_team_splits_checkpoints.csv',sep = ',',row.names = F)
