@@ -27,20 +27,24 @@ def distance(pt1,pt2):
     
     dist = Earth_Radius*abs(delta_lat) + 0.5*d_el_d_lat*delta_lat**2
     return(dist)
+
+def point_data(pt,filepath):
+    f = open(filepath + '/Geo_spatial_data_checkpoints.csv','r')
+    lines = f.readlines()[1:]
+    pt_index = pt-101
     
+
+    pt_data = np.asarray(lines[pt_index].strip().split(',')[1:4],dtype = float)
+ 
+    return(pt_data)
+
 def point_distance(pt1,pt2,filepath = '.'):
     '''Takes two points as ints, for example, 111, 127, 15.  Reads the csv file
     at location filepath (default: the current working directory - and pulls the
     Lat Long and elvation information.Plugs them into distance and returns the answer.  
     '''
-    f = open(filepath + '/Geo_spatial_data_checkpoints.csv','r')
-    lines = f.readlines()[1:]
-    pt1_index = pt1-101
-    pt2_index = pt2-101
-
-    p1_data = np.asarray(lines[pt1_index].strip().split(',')[1:4],dtype = float)
-    p2_data = np.asarray(lines[pt2_index].strip().split(',')[1:4],dtype = float)
-
+    p1_data = point_data(pt1,filepath)
+    p2_data = point_data(pt2,filepath)
     dist = distance(p1_data,p2_data)
 
     return(dist)
