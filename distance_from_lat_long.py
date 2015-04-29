@@ -89,23 +89,3 @@ def polar_to_cartesian(filepath = '.'):
         Y = np.asarray(Y,dtype = float)
         return(Pt,X,Y)
 
-# <codecell>
-
-(Pt,X,Y) = polar_to_cartesian()
-
-import matplotlib.pyplot as plt
-%matplotlib inline
-point = range(101,150)
-fig = plt.figure(figsize = (10,15))
-ax = fig.add_subplot(111,aspect = 'equal')
-for pt in point:
-    pd = point_data(pt,'.')
-    plt.plot(pd[1],pd[0],'bo')
-    
-fig = plt.figure(figsize = (10,15))
-ax = fig.add_subplot(111,aspect = 'equal')
-plt.plot(X,Y,'bo')
-
-# <codecell>
-
-
