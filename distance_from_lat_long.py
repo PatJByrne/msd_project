@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <markdowncell>
+# coding: utf-8
 
 # #This is my notebook
 # 
 # In this notebook I solve an equation like $\int{0}{R_{earth}}$
 
-# <codecell>
+# In[15]:
 
 import numpy as np
 Earth_Radius = 6.37e6
@@ -72,13 +70,18 @@ def polar_to_cartesian(filepath = '.'):
         X = ['0']
         Y = ['0']
         for line in lines[:-1]:
+            if '106' in line.strip().split(',')[0]:
+                pc = line.strip().split(',')
+                print pc
+                print (float(pc[1])-sf_Lat)*degrees*Earth_Radius
+                print (float(pc[2])-sf_Long)*degrees*Earth_Radius
             pc = line.strip().split(',')
             Lat = float(pc[1])
             dLat = Lat-sf_Lat
             dLong = float(pc[2])-sf_Long
             Pt.append(pc[0])
-            X.append(str(Earth_Radius*dLat*degrees))
-            Y.append(str(Earth_Radius*dLong*degrees*np.cos(Lat*degrees)))
+            Y.append(str(Earth_Radius*dLat*degrees))
+            X.append(str(Earth_Radius*dLong*degrees*np.cos(Lat*degrees)))
         f = open(filepath + '/Geo_spatial_data_checkpoints_meters.csv','w')
         f.write(','.join(['Point','X','Y']))
         for i in range(len(Pt)):
@@ -88,4 +91,11 @@ def polar_to_cartesian(filepath = '.'):
         X = np.asarray(X, dtype = float)
         Y = np.asarray(Y,dtype = float)
         return(Pt,X,Y)
+    
+(PT,X,Y) = polar_to_cartesian()
+
+
+# In[ ]:
+
+
 
