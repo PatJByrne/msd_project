@@ -1,0 +1,73 @@
+,team ID,Team Name,Time Limit,Category,Size,Borrow,test,Rank,Class,Club,Time,Gross Score,Penalty,Score
+0,401,BeeRingers,6,"Masters, Mixed",2.0,Y,BeeRingers,10.0,MB6,,,780,0,780
+1,403,High and Dry,6,"Masters, Men",2.0,Y,HighandDry,,MM6,,,400,0,400
+2,403,High and Dry,6,"Masters, Men",2.0,Y,HighandDry,53.0,MM6,,,330,510,-180
+3,404,Team Spang,6,"Masters, Mixed",2.0,N,TeamSpang,,MB6,WPOC,,790,0,790
+4,405,Yaki   Barak,6,"Masters, Men",1.0,N,YakiBarak,37.0,MM6,WPOC,,500,0,500
+5,407,Gordon   Huang,6,"Elite, Men",1.0,Y,GordonHuang,39.0,EM6,WPOC,,440,0,440
+6,408,Mountain Meisters,6,"Elite, Men",2.0,Y,MountainMeisters,38.0,EM6,,,460,0,460
+7,409,Nightcrawlers,6,"Veterans, Mixed",2.0,N,Nightcrawlers,22.0,VB6,,,670,0,670
+8,410,Victorious Seekers,6,"Elite, Mixed",2.0,Y,VictoriousSeekers,22.0,EB6,,,670,0,670
+9,411,Olga   Huber,6,"Masters, Women",1.0,Y,OlgaHuber,2.0,MW6,,,910,0,910
+10,412,Wishin' I was Fishin',6,"Masters, Men",1.0,Y,Wishin'IwasFishin',4.0,MM6,,,880,0,880
+11,413,WTF (Where's the Finish),6,"Masters, Women",2.0,Y,WTF(Where'stheFinish),45.0,MW6,,,340,0,340
+12,414,Kathy Jo Rufener,6,"Masters, Women",1.0,Y,KathyJoRufener,49.0,MW6,,,300,0,300
+13,415,Clint Hartle,6,"Elite, Men",1.0,Y,ClintHartle,35.0,EM6,,,520,0,520
+14,416,Wonderful Adventure Racers,6,"Elite, Mixed",2.0,N,WonderfulAdventureRacers,7.0,EB6,,,830,10,820
+15,417,Richard Davies,6,"Veterans, Men",1.0,N,RichardDavies,52.0,VM6,,,360,380,-20
+16,418,Buck n' Sunshine,6,"Elite, Mixed",2.0,Y,Buckn'Sunshine,33.0,EB6,,,540,0,540
+17,419,Third Wheel,6,"Elite,Mixed",3.0,Y,ThirdWheel,28.0,EB6,,,560,0,560
+18,420,Grey   Michels,6,"Masters, Men",1.0,N,GreyMichels,5.0,MM6,,,860,0,860
+19,421,Charles Borchart,6,"Veterans, Men",1.0,Y,CharlesBorchart,39.0,VM6,,,440,0,440
+20,422,Kevin Peterson,6,"Elite, Men",1.0,Y,KevinPeterson,21.0,EM6,,,680,0,680
+21,423,Lisa Storey,6,"Elite, Women",1.0,Y,LisaStorey,28.0,EW6,,,560,0,560
+22,426,Dan Beggs,6,"Masters, Men",1.0,Y,DanBeggs,11.0,MM6,,,760,0,760
+23,427,Erin Rycroft,6,"Elite, Women",1.0,N,ErinRycroft,25.0,EW6,,,600,0,600
+24,429,Thomas Rycroft,6,"Masters, Men",1.0,N,ThomasRycroft,3.0,MM6,,,890,0,890
+25,428,Rust Belt Runners,6,"Masters, Men",2.0,Y,RustBeltRunners,42.0,MM6,,,390,0,390
+26,430,JJ,6,"Masters, Men",1.0,Y,JJ,17.0,MM6,,,710,0,710
+27,431,IndyXpress,6,"Masters, Mixed",2.0,Y,IndyXpress,11.0,MB6,,,760,0,760
+28,432,Jerry Agin,6,"Veterans, Men",1.0,Y,JerryAgin,17.0,VM6,WPOC,,710,0,710
+29,433,Master Mart,6,"Elite, Men",2.0,Y,MasterMart,50.0,EM6,,,260,0,260
+30,434,Honey Badgers,6,"Elite, Mixed",4.0,Y,HoneyBadgers,48.0,EB6,,,320,0,320
+31,435,MK,6,"Elite, Men",1.0,Y,MK,16.0,EM6,,,740,20,720
+32,436,Over the Hills,6,"Masters, Men",3.0,Y,OvertheHills,26.0,MM6,,,580,0,580
+33,437,Ryan Knecht,6,"Masters, Men",1.0,N,RyanKnecht,24.0,MM6,WPOC,,610,0,610
+34,438,Riley Jane,6,"Elite, Men",2.0,Y,RileyJane,9.0,EM6,,,810,0,810
+35,439,Rhumb Runners,6,"Veterans, Mixed",2.0,Y,RhumbRunners,35.0,VB6,WPOC,,520,0,520
+36,440,Jim Trautmann,6,"Masters, Men",1.0,N,JimTrautmann,6.0,MM6,WPOC,,840,0,840
+37,442,Team Shangle,6,"Masters, Mixed",2.0,Y,TeamShangle,46.0,MB6,,,330,0,330
+38,443,Will Orienteer for Beer,6,"Elite, Mixed",4.0,Y,WillOrienteerforBeer,46.0,EB6,,,330,0,330
+39,444,Rev3 Ladies,6,"Elite, Women",2.0,Y,Rev3Ladies,7.0,EW6,,,820,0,820
+40,445,Michelle Green,6,"Elite, Women",1.0,Y,MichelleGreen,15.0,EW6,,,730,0,730
+41,446,Farmers Insurance Racing,3,"Elite, Men",2.0,Y,FarmersInsuranceRacing,18.0,EM3,,,220,270,-50
+42,447,Not Our First Threesome,6,"Elite, Mixed",3.0,Y,NotOurFirstThreesome,43.0,EB6,,,380,0,380
+43,448,MZ,6,"Elite, Mixed",2.0,Y,MZ,39.0,EB6,,,440,0,440
+44,450,Strat-o-matic,6,"Elite, Men",2.0,N,Strat-o-matic,31.0,EM6,WPOC,,550,0,550
+45,451,Come Back Shane!,6,"Masters, Men",1.0,Y,ComeBackShane!,17.0,MM6,,,730,20,710
+46,452,Hail to the Chimp,6,"Elite, Men",1.0,Y,HailtotheChimp,1.0,EM6,,,1200,30,1170
+47,453,Controlled Chaos,6,"Masters, Mixed",2.0,Y,ControlledChaos,31.0,MB6,,,550,0,550
+48,454,McFoxy's Revenge,6,"Elite, Mixed",2.0,Y,McFoxy'sRevenge,34.0,EB6,,,530,0,530
+49,455,WeMo,6,"Elite, Mixed",3.0,Y,WeMo,26.0,EB6,,,580,0,580
+50,456,Brian Ottinger,6,"Veterans, Men",1.0,Y,BrianOttinger,28.0,VM6,,,620,60,560
+51,457,Brian Buchan,6,"Masters, Men",1.0,Y,BrianBuchan,44.0,MM6,,,370,0,370
+52,458,Todd Pownell,6,"Masters, Men",1.0,Y,ToddPownell,13.0,MM6,,,750,0,750
+53,275,This is what happens Larry,3,"Elite, Men ",2.0,Y,ThisiswhathappensLarry,8.0,EM3,,,150,0,150
+54,277,Sherry   Shank,3,"Veterans, Women",1.0,N,SherryShank,4.0,VW3,WPOC,,230,0,230
+55,278,The Doddering Gits,3,"Masters, Mixed",4.0,Y,TheDodderingGits,9.0,MB3,,,140,0,140
+56,279,Jonestown,3,"Masters, Mixed",4.0,Y,Jonestown,2.0,MB3,,,390,30,360
+57,280,Barbara Johnstone,3,"Veterans, Women",1.0,Y,BarbaraJohnstone,16.0,VW3,WPOC,,20,0,20
+58,281,Team Wildman,3,"Elite, Mixed",2.0,Y,TeamWildman,5.0,EB3,,,250,30,220
+59,284,Maptitude,3,"Veterans, Mixed",2.0,Y,Maptitude,6.0,VB3,,,200,0,200
+60,285,NimKik Skulls,3,"Elite, Men",2.0,Y,NimKikSkulls,3.0,EM3,,,270,0,270
+61,287,MudSkippers,3,"Elite, Women",4.0,Y,MudSkippers,17.0,EW3,,,40,40,0
+62,288,Fox River,3,"Elite, Mixed",2.0,Y,FoxRiver,19.0,EB3,,,110,330,-220
+63,289,Two of a Kind,3,"Masters, Mixed",2.0,Y,TwoofaKind,12.0,MB3,,,90,0,90
+64,290,Left Shark,3,"Elite, Mixed",2.0,Y,LeftShark,10.0,EB3,,,120,0,120
+65,291,Klokkerud from Norway,3,"Masters, Men",2.0,Y,KlokkerudfromNorway,1.0,MM3,,,390,0,390
+66,292,John Hinderliter,3,"Veterans, Men",1.0,Y,JohnHinderliter,14.0,VM3,,,250,180,70
+67,293,Team Atomic Ants,3,"Elite, Mixed",2.0,Y,TeamAtomicAnts,15.0,EB3,,,60,0,60
+68,295,Where's Waldo?,3,"Elite, Mixed",3.0,Y,Where'sWaldo?,13.0,EB3,,,90,10,80
+70,459,American Adventure Sports Cycle Shop,6,,4.0,Y,AmericanAdventureSportsCycleShop,17.0,EB6,,,710,0,710
+71,286,Team 3DZ,3,,5.0,Y,Team3DZ,7.0,EM3,,,180,0,180
+72,276,Team Immelmann,3,,2.0,Y,TeamImmelmann,10.0,EB3,,,120,0,120
