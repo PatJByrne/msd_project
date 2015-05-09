@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <codecell>
+# coding: utf-8
+
+# In[3]:
 
 import re
 from collections import OrderedDict
@@ -22,17 +22,19 @@ class Node(object):
         self.points = pts
         if (prv != None):
             self.prv = prv
-            self.prv_edge = distance_from_lat_long.point_distance(self.num,self.prv)
+            self.prv_edge = distance_from_lat_long.point_distance_pixel(self.num,self.prv)
         else: [self.prv,self.prv_edge] = [None,None]
             
         if (nxt != None):
             self.nxt = nxt
-            self.nxt_edge = distance_from_lat_long.point_distance(self.num,self.nxt)
+            self.nxt_edge = distance_from_lat_long.point_distance_pixel(self.num,self.nxt)
         else: [self.nxt,self.nxt_edge] = [None,None]
             
     def set_nxt(self,nxt):
         self.nxt = nxt
-        self.nxt_edge = distance_from_lat_long.point_distance(self.num,self.nxt)
+        #print self.num, self.nxt
+        self.nxt_edge = distance_from_lat_long.point_distance_pixel(self.num,self.nxt)
+        
 def team_grapher():
     f = open('Race_data_team_splits_checkpoints.csv','r')
     lines = f.readlines()[1:]
@@ -74,11 +76,8 @@ def team_grapher():
         team_graph[team].append(Node(point, prv = prv_Node.num,splt = splt,pts = pts))
     return(team_graph)
 
-# <codecell>
 
-#print(team_graph.keys())
-
-# <codecell>
+# In[4]:
 
 #sec_pt = 0
 #for n,node in enumerate(team_graph['454']):
@@ -88,7 +87,8 @@ def team_grapher():
 #        sec_pt += node.time/float(node.points)
 #print sec_pt
 
-# <codecell>
+
+# In[4]:
 
 #print '#  ','<-time','->time','pts'
 #sec_pt = 0
@@ -100,21 +100,26 @@ def team_grapher():
 #        sec_pt += node.time/float(node.points)
 #print sec_pt
 
-# <codecell>
+
+# In[5]:
 
 #for node in team_graph['275']:
 #    print node.num,node.prv_edge,node.nxt_edge,node.time
 
-# <codecell>
+
+# In[6]:
 
 #for node in team_graph['439']:
 #    print node.num,node.prv_edge,node.nxt_edge,node.time
 
-# <codecell>
+
+# In[7]:
 
 #for node in team_graph['409']:
 #    print node.num,node.prv_edge,node.nxt_edge,node.time
 
-# <codecell>
+
+# In[ ]:
+
 
 

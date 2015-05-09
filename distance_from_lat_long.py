@@ -1,15 +1,12 @@
 
 # coding: utf-8
 
-# #This is my notebook
-# 
-# In this notebook I solve an equation like $\int{0}{R_{earth}}$
-
-# In[15]:
+# In[32]:
 
 import numpy as np
-Earth_Radius = 6.37e6
+Earth_Radius = 6.371e6
 degrees = np.pi/180.
+pixel_to_meter = 500./(497-300)
 
 def distance(pt1,pt2):
     '''Trick is to assume that the point of intest is the 'North Pole'.  We're modeling 
@@ -33,14 +30,25 @@ def distance(pt1,pt2):
     correction = 0.5*d_el_d_lat*delta_lat**2
     return(dist,correction)
 
-def point_data(pt,filepath):
+
+def point_data_lat_long(pt,filepath):
     f = open(filepath + '/Geo_spatial_data_checkpoints.csv','r')
     lines = f.readlines()[1:]
     f.close()
     pt_index = pt-101
     
+    pt_data = np.asarray(lines[pt_index].strip().split(',')[1:6],dtype = float)[True,True,False,False,True]
+ 
+    return(pt_data)
 
-    pt_data = np.asarray(lines[pt_index].strip().split(',')[1:4],dtype = float)
+def point_data_pixel(pt,filepath):
+    f = open(filepath + '/Geo_spatial_data_checkpoints.csv','r')
+    lines = f.readlines()[1:]
+    f.close()
+    pt_index = pt-101
+    
+    pt_data = np.append(np.asarray(lines[pt_index].strip().split(',')[4:6],dtype = float),
+                        float(lines[pt_index].strip().split(',')[3]))
  
     return(pt_data)
 
@@ -49,11 +57,29 @@ def point_distance(pt1,pt2,filepath = '.'):
     at location filepath (default: the current working directory - and pulls the
     Lat Long and elvation information.Plugs them into distance and returns the answer.  
     '''
-    p1_data = point_data(pt1,filepath)
-    p2_data = point_data(pt2,filepath)
+    p1_data = point_data_lat_long(pt1,filepath)
+    p2_data = point_data_lat_long(pt2,filepath)
     (dist,correction) = distance(p1_data,p2_data)
 
     return(abs(dist)+correction)
+
+def point_distance_pixel(pt1,pt2,filepath = '.'):
+    '''Takes two points as ints, for example, 111, 127, 15.  Reads the csv file
+    at location filepath (default: the current working directory - and pulls the
+    Lat Long and elvation information.Plugs them into distance and returns the answer.  
+    '''
+    f = open(filepath + '/Geo_spatial_data_checkpoints_meters.csv','r')
+    lines = f.readlines()[1:]
+    f.close()
+    
+    p1_data = np.asarray(lines[pt1-100].strip().split(','),dtype = float)
+    p2_data = np.asarray(lines[pt2-100].strip().split(','),dtype = float)
+    distance = np.sqrt( (p1_data[1]-p2_data[1])**2 +
+                        (p1_data[2]-p2_data[2])**2 +
+                        (p1_data[3]-p2_data[3])**2
+                      )
+
+    return(distance)
         
 def polar_to_cartesian(filepath = '.'):
         '''Takes the Latitudes and Longitudes and converts them into X,Y coordinates.
@@ -70,11 +96,7 @@ def polar_to_cartesian(filepath = '.'):
         X = ['0']
         Y = ['0']
         for line in lines[:-1]:
-            if '106' in line.strip().split(',')[0]:
-                pc = line.strip().split(',')
-                print pc
-                print (float(pc[1])-sf_Lat)*degrees*Earth_Radius
-                print (float(pc[2])-sf_Long)*degrees*Earth_Radius
+ 
             pc = line.strip().split(',')
             Lat = float(pc[1])
             dLat = Lat-sf_Lat
@@ -92,10 +114,40 @@ def polar_to_cartesian(filepath = '.'):
         Y = np.asarray(Y,dtype = float)
         return(Pt,X,Y)
     
-(PT,X,Y) = polar_to_cartesian()
-
-
-# In[ ]:
-
-
+def pixel_to_cartesian(filepath = '.'):
+        '''Takes the X/Y pixel values and converts them into X,Y coordinates in meters relative to start.
+        (0,0) defined as the start/finish'''
+        f = open(filepath + '/Geo_spatial_data_checkpoints.csv','r')
+        lines = f.readlines()[1:]
+        f.close()
+        sf = lines[-1].strip().split(',')
+        sf_X_pix = float(sf[3])
+        sf_Y_pix = float(sf[4])
+        
+        Pt = ['100']
+        X = ['0']
+        Y = ['0']
+        elev = ['356']
+        dX_pix = 0
+        dY_pix = 0
+        for line in lines[:-1]:
+            pc = line.strip().split(',')
+            dX_pix = float(pc[3])-sf_X_pix
+            dY_pix = float(pc[4])-sf_Y_pix
+            Pt.append(pc[0])
+            X.append(str(dX_pix*pixel_to_meter))
+            Y.append(str(dY_pix*pixel_to_meter))
+            elev.append(pc[5])
+        f = open(filepath + '/Geo_spatial_data_checkpoints_meters.csv','w')
+        f.write(','.join(['Point','X','Y','Elevation']))
+        f.write('\n')
+        for i in range(len(Pt)):
+            f.write(','.join([Pt[i],X[i],Y[i],elev[i]]))
+            f.write('\n')
+        f.close()
+        Pt = np.asarray(Pt,dtype = int)
+        X = np.asarray(X, dtype = float)
+        Y = np.asarray(Y,dtype = float)
+        Z = np.asarray(elev,dtype = float)
+        return(Pt,X,Y,Z)
 
